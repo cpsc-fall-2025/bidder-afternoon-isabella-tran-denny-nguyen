@@ -44,20 +44,27 @@ std::vector<int> Choices{0, 31, 11, 0, 22, 0, 21, 0, 15, 0};
 int Used_Budget{0};
 
 void GenerateBids(int rounds, int budget, std::string output_filename) {
-  // Your code here
-  std::ofstream output{output_filename};
+  std::ofstream output{output_filename}; // Text file of the bids for each round
+
   for (int round = 0; round < rounds; ++round) {
-    if (round >= 10) {
-       output << 0 << "\n";
+    int Chosen_Number{0};
 
-    } else if (round < 10 && budget >= Used_Budget) {
-      int Chosen_Number = Choices.at(round);
-      Used_Budget += Chosen_Number;
-        
+    if ((round + 1) == rounds) { // If its the final round, go all in using the remainder of the budget.
+      Chosen_Number = budget - Used_Budget;
 
-      //std::cout << Chosen_Number << "\n";
-       output << Chosen_Number << "\n";
+    } else if (round >= 10 || budget <= Used_Budget) { // If its past round 10 or we have no more budget, default to 0
+       Chosen_Number = 0;
+
+    } else if (round < 10 && budget > Used_Budget) {
+      Chosen_Number = Choices.at(round); // Each round has a corosponding bid for it, up to round 10.
+
+      if (Chosen_Number + Used_Budget > budget) { // If the current bid would exceed our budget, default to
+        Chosen_Number = 0;
+      }
     }
+
+    Used_Budget += Chosen_Number;
+    output << Chosen_Number << "\n";
   }
 }
 
@@ -70,6 +77,6 @@ int main() {
   // You can write code here to call your functions and see if they work.
   // Example:
   // GenerateBids(10, 100, "test_output.txt");
-  //GenerateBids(20, 100, "test_output.txt");
+  //GenerateBids(10, 100, "test_output.txt");
   return 0;
 }
