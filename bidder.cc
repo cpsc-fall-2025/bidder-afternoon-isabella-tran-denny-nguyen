@@ -48,14 +48,14 @@ void GenerateBids(int rounds, int budget, std::string output_filename) {
   std::ofstream output{output_filename};
   for (int round = 0; round < rounds; ++round) {
     if (round >= 10) {
+       output << 0 << "\n";
 
-    else if (round < 10 && budget >= Used_Budget) {
+    } else if (round < 10 && budget >= Used_Budget) {
       int Chosen_Number = Choices.at(round);
       Used_Budget += Chosen_Number;
         
 
       //std::cout << Chosen_Number << "\n";
-
        output << Chosen_Number << "\n";
     }
   }
@@ -70,6 +70,6 @@ int main() {
   // You can write code here to call your functions and see if they work.
   // Example:
   // GenerateBids(10, 100, "test_output.txt");
-  GenerateBids(10, 100, "test_output.txt");
+  //GenerateBids(20, 100, "test_output.txt");
   return 0;
 }
