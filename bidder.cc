@@ -22,7 +22,7 @@ std::vector<std::string> GetTeamMembers() {
 // the strategy your logic uses to bid (e.g., "We bid high early on").
 std::string GetStrategy() {
   // Your code here
-  return "WE USED A RANDOM NUMBER GENERATOR AS WELL AS INTENSE LOGICAL THINKING AND PROBLEM SOLVING SKILLS.";
+  return "We used dice rolls in order to decide how much money we would spend on each round.";
 }
 
 // TODO: Implement the bidding logic.
